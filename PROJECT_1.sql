@@ -1,29 +1,31 @@
 USE ecommerce;
 
-DESC users_data;  -- Q.3
+DESC users_data;  -- structure of table
 
-SELECT * FROM users_data LIMIT 100; -- Q.4
+SELECT * FROM users_data LIMIT 100; -- select first 100 rows of the database
 
-SELECT COUNT( DISTINCT country), count( distinct language)  FROM users_data;  -- Q.5
+SELECT COUNT( DISTINCT country), count( distinct language)  FROM users_data;  -- distinct values exist in table for field country and language
 
 SELECT COUNT(gender) FROM users_data WHERE gender = 'M' ;
 SELECT COUNT(gender) FROM users_data WHERE gender = 'F';
 SELECT COUNT(gender) FROM users_data ;
 SELECT COUNT(socialNbFollowers) FROM users_data;
 
-SELECT COUNT(socialNbFollowers) FROM users_data group by gender ;  -- Q.6
-SELECT 'Female_count',COUNT(socialNbFollowers) FROM users_data WHERE gender='F' ;   -- Q.6
+SELECT COUNT(socialNbFollowers) FROM users_data group by gender ;  
+SELECT 'Female_count',COUNT(socialNbFollowers) FROM users_data WHERE gender='F' ;   -- Check whether male users are having maximum followers or female users.
 -- FEMALE USERS HAVE MAXIMUM NUMBER OF FOLLOWERS
 
-SELECT 'Uses_ProfilePic' , count(hasProfilePicture) FROM users_data WHERE hasProfilePicture='True'; -- Q.7
-SELECT 'Uses_Application' , count(hasAnyApp) FROM users_data WHERE hasAnyApp='True'; -- Q.7
-SELECT 'Uses_Android' , count(hasAndroidApp) FROM users_data WHERE hasAndroidApp='True'; -- Q.7
-SELECT 'Uses_ios' , count(hasIosApp) FROM users_data WHERE hasIosApp='True'; -- Q.7
-
+SELECT 'Uses_ProfilePic' , count(hasProfilePicture) FROM users_data WHERE hasProfilePicture='True'; -- total users those Uses Profile Picture in their Profile
+SELECT 'Uses_Application' , count(hasAnyApp) FROM users_data WHERE hasAnyApp='True'; -- total users Uses Application for Ecommerce platform
+SELECT 'Uses_Android' , count(hasAndroidApp) FROM users_data WHERE hasAndroidApp='True'; -- total users Uses Android app
+SELECT 'Uses_ios' , count(hasIosApp) FROM users_data WHERE hasIosApp='True'; -- total users Uses ios app
+ 
+-- Q.8 Calculate the total number of buyers for each country and sort the result in descending order of total number of buyers.
 SELECT * FROM users_data;
-SELECT country, count(productsBought) from USERS_DATA WHERE productsBought !=0 GROUP BY country ORDER BY count(productsBought) DESC; -- Q.8
+SELECT country, count(productsBought) from USERS_DATA WHERE productsBought !=0 GROUP BY country ORDER BY count(productsBought) DESC; 
 
-SELECT country, count(productsSold) from USERS_DATA  WHERE productsSold !=0 GROUP BY country ORDER BY count(productsSold) ; -- Q.9
+-- Q.9 Calculate the total number of sellers for each country and sort the result in ascending order of total number of sellers
+SELECT country, count(productsSold) from USERS_DATA  WHERE productsSold !=0 GROUP BY country ORDER BY count(productsSold) ; 
 
 -- q.10 Display name of top 10 countries having maximum products pass rate.
 SELECT max(productsPassRate), country FROM users_data WHERE productsPassRate!=0 GROUP BY country ORDER BY  productsPassRate DESC LIMIT 10;
